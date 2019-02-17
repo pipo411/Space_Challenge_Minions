@@ -28,13 +28,10 @@ public class Simulation {
         ArrayList<Rocket> rocketList = new ArrayList<>();
         U1 rocket = new U1();
         for (Item item : this.listOfItems) {
-            if (rocket.canCarry(item)) {
-                rocket.carry(item);
-            } else {
-                rocketList.add(rocket);
-                rocket = new U1();
-                rocket.carry(item);
+            if (!rocket.canCarry(item)) {
+                rocketList.add(new U1());
             }
+            rocket.carry(item);
         }
         return rocketList;
     }
@@ -44,19 +41,16 @@ public class Simulation {
         ArrayList<Rocket> rocketList = new ArrayList<>();
         U2 rocket = new U2();
         for (Item item : this.listOfItems) {
-            if (rocket.canCarry(item)) {
-                rocket.carry(item);
-            } else {
-                rocketList.add(rocket);
-                rocket = new U2();
-                rocket.carry(item);
+            if (!rocket.canCarry(item)) {
+                rocketList.add(new U2());
             }
+            rocket.carry(item);
         }
         return rocketList;
     }
 
     public String runSimulation(ArrayList<Rocket> rockets) {
-        int budget = 0;
+        long budget = 0;
         int rocketCount = 0;
         for (Rocket rocket : rockets) {
             while (!rocket.land() || !rocket.launch()) {

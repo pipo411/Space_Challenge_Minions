@@ -32,7 +32,6 @@ public class Rocket implements SpaceShip {
 
     @Override
     public boolean canCarry(Item item) {
-        System.out.println("--------------------------------------"+this.currentWeight);
         return (this.currentWeight + item.getWeight()) <= this.maxWeight;
     }
 
