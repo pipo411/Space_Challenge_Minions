@@ -1,10 +1,15 @@
 package main.java;
 
 public class Item {
-    protected String name;
-    protected int weight;
+    private String name;
+    private int weight;
+
     protected Item(String name, int weight) {
         this.name = name;
         this.weight = weight;
+    }
+
+    public int getWeight() {
+        return weight;
     }
 }
