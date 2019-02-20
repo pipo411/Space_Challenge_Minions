@@ -7,21 +7,44 @@ import main.java.rocket.Rocket;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+        ArrayList results;
+        double budgetu1;
+        double budgetu2;
+
+        double costu1;
+        double costu2;
         //Phase 1
         System.out.println("************************************* Phase 1 *************************************");
         Simulation simulation = new Simulation();
         simulation.loadItems("phase-1.txt");
-        ArrayList<Rocket> rockets = simulation.loadU1();
-        String x = simulation.runSimulation(rockets);
-        System.out.println(x);
-        ArrayList<Rocket> rockets1 = simulation.loadU2();
-        String x1 = simulation.runSimulation(rockets1);
-        System.out.println(x1);
+        results = simulation.runSimulation(simulation.loadU1());
+        System.out.println(String.format("The simulation has the following results Budget: %s and Rockets: %s", results.get(0), results.get(1)));
+      //  budgetu1 = (Double) results.get(0);
+        costu1 = (Double) results.get(1);
+
+        results = simulation.runSimulation(simulation.loadU2());
+        System.out.println(String.format("The simulation has the following results Budget: %s and Rockets: %s", results.get(0), results.get(1)));
+       // budgetu2 = (Double) results.get(0);
+        costu2 = (Double) results.get(1);
+
         //Phase 2
         System.out.println("************************************* Phase 2 *************************************");
         Simulation simulation2 = new Simulation();
         simulation2.loadItems("phase-2.txt");
-        System.out.println(simulation2.runSimulation(simulation2.loadU1()));
-        System.out.println(simulation2.runSimulation(simulation2.loadU2()));
+        results = simulation2.runSimulation(simulation.loadU1());
+        System.out.println(String.format("The simulation has the following results Budget: %s and Rockets: %s", results.get(0), results.get(1)));
+       // budgetu1 += (Double) results.get(0);
+        costu1 += (Double) results.get(1);
+
+        results = simulation2.runSimulation(simulation.loadU2());
+        System.out.println(String.format("The simulation has the following results Budget: %s and Rockets: %s", results.get(0), results.get(1)));
+        //budgetu2 = (Double) results.get(0);
+        costu2 += (Double) results.get(1);
+
+        //get the best simulation:
+        String finalOption =  costu1 < costu2 ? "The U1 is the best option" : "The U2 is the best option";
+        System.out.println(finalOption);
+
+
     }
 }

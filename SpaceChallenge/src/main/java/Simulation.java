@@ -30,13 +30,17 @@ public class Simulation {
     public ArrayList<Rocket> loadU1() {
         ArrayList<Rocket> rocketList = new ArrayList<>();
         U1 rocket = new U1();
+        //Iterate item list
         for (Item item : this.listOfItems) {
             if (!rocket.canCarry(item)) {
-                //rocket.setCurrentWeight(rocket.ge);
                 rocketList.add(rocket);
                 rocket = new U1();
             }
             rocket.carry(item);
+        }
+        //verify if the last rocket was added to rocketList
+        if (!rocketList.contains(rocket)) {
+            rocketList.add(rocket);
         }
         return rocketList;
     }
@@ -47,24 +51,40 @@ public class Simulation {
         U2 rocket = new U2();
         for (Item item : this.listOfItems) {
             if (!rocket.canCarry(item)) {
-                rocketList.add(new U2());
+                rocketList.add(rocket);
+                rocket = new U2();
             }
             rocket.carry(item);
+        }
+        if (!rocketList.contains(rocket)) {
+            rocketList.add(rocket);
         }
         return rocketList;
     }
 
-    public String runSimulation(ArrayList<Rocket> rockets) {
-        long budget = 0;
+    public ArrayList<Double> runSimulation(ArrayList<Rocket> rockets) {
+        ArrayList<Double> results = new ArrayList<>();
+
+        double budget = 0;
         int rocketCount = 0;
         for (Rocket rocket : rockets) {
-            while (!rocket.land() || !rocket.launch()) {
+            /*while (!rocket.land() || !rocket.launch()) {
                 rocketCount++;
                 budget += rocket.getCost();
+            }*/
+            while (!rocket.launch()) {
+                rocket.launch();
+                rocketCount++;
+            }
+            while (!rocket.land()) {
+                rocket.land();
+                rocketCount++;
             }
             rocketCount++;
             budget += rocket.getCost();
         }
-        return String.format("The simulation has the following results Budget: %s and Rockets: %s", budget, rocketCount);
+        results.add(budget);
+        results.add((double) rocketCount);
+        return results;
     }
 }
