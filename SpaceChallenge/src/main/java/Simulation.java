@@ -9,10 +9,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Simulation {
-    private ArrayList<Item> listOfItems = new ArrayList<>();
+    private ArrayList<Item> listOfItems;
 
-    public ArrayList<Item> loadItems(String path_file) throws Exception {
-        String path = String.format("src\\main\\java\\resources\\%s", path_file);
+    public Simulation() {
+        listOfItems = new ArrayList<>();
+    }
+
+    public void loadItems(String path_file) throws Exception {
+        String path = String.format("src/main/java/resources/%s", path_file);
         File file = new File(path);
         Scanner scanner = new Scanner(file);
 
@@ -21,7 +25,6 @@ public class Simulation {
             Item item = new Item(item_description[0], Integer.parseInt(item_description[1]));
             this.listOfItems.add(item);
         }
-        return listOfItems;
     }
 
     public ArrayList<Rocket> loadU1() {
@@ -29,7 +32,9 @@ public class Simulation {
         U1 rocket = new U1();
         for (Item item : this.listOfItems) {
             if (!rocket.canCarry(item)) {
-                rocketList.add(new U1());
+                //rocket.setCurrentWeight(rocket.ge);
+                rocketList.add(rocket);
+                rocket = new U1();
             }
             rocket.carry(item);
         }

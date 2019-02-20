@@ -7,13 +7,13 @@ public class Rocket implements SpaceShip {
     protected int cost;
     protected int weight;
     protected int maxWeight;
-    protected int currentWeight = 0;
+    protected int currentWeight;
 
-    Rocket(int cost, int weight, int maxWeight) {
+    Rocket(int cost, int weight, int maxWeight, int currentWeight) {
         this.cost = cost;
         this.weight = weight;
         this.maxWeight = maxWeight;
-
+        this.currentWeight = currentWeight;
     }
 
     public int getCost() {
@@ -38,6 +38,10 @@ public class Rocket implements SpaceShip {
     @Override
     public void carry(Item item) {
         this.currentWeight += item.getWeight();
+    }
+
+    public void setCurrentWeight(int currentWeight) {
+        this.currentWeight = currentWeight;
     }
 
 }
