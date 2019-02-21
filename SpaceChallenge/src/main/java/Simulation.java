@@ -9,10 +9,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Simulation {
-    private ArrayList<Item> listOfItems = new ArrayList<>();
+    private ArrayList<Item> listOfItems;
 
-    public ArrayList<Item> loadItems(String path_file) throws Exception {
-        String path = String.format("src\\main\\java\\resources\\%s", path_file);
+    public Simulation() {
+        listOfItems = new ArrayList<>();
+    }
+
+    public void loadItems(String path_file) throws Exception {
+        String path = String.format("src/main/java/resources/%s", path_file);
         File file = new File(path);
         Scanner scanner = new Scanner(file);
 
@@ -21,17 +25,22 @@ public class Simulation {
             Item item = new Item(item_description[0], Integer.parseInt(item_description[1]));
             this.listOfItems.add(item);
         }
-        return listOfItems;
     }
 
     public ArrayList<Rocket> loadU1() {
         ArrayList<Rocket> rocketList = new ArrayList<>();
         U1 rocket = new U1();
+        //Iterate item list
         for (Item item : this.listOfItems) {
             if (!rocket.canCarry(item)) {
-                rocketList.add(new U1());
+                rocketList.add(rocket);
+                rocket = new U1();
             }
             rocket.carry(item);
+        }
+        //verify if the last rocket was added to rocketList
+        if (!rocketList.contains(rocket)) {
+            rocketList.add(rocket);
         }
         return rocketList;
     }
@@ -42,24 +51,33 @@ public class Simulation {
         U2 rocket = new U2();
         for (Item item : this.listOfItems) {
             if (!rocket.canCarry(item)) {
-                rocketList.add(new U2());
+                rocketList.add(rocket);
+                rocket = new U2();
             }
             rocket.carry(item);
+        }
+        if (!rocketList.contains(rocket)) {
+            rocketList.add(rocket);
         }
         return rocketList;
     }
 
-    public String runSimulation(ArrayList<Rocket> rockets) {
-        long budget = 0;
+    public ArrayList<Double> runSimulation(ArrayList<Rocket> rockets) {
+        ArrayList<Double> results = new ArrayList<>();
+
+        double budget = 0;
         int rocketCount = 0;
         for (Rocket rocket : rockets) {
             while (!rocket.land() || !rocket.launch()) {
                 rocketCount++;
                 budget += rocket.getCost();
             }
+
             rocketCount++;
             budget += rocket.getCost();
         }
-        return String.format("The simulation has the following results Budget: %s and Rockets: %s", budget, rocketCount);
+        results.add(budget);
+        results.add((double) rocketCount);
+        return results;
     }
 }
