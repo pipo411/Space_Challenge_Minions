@@ -68,18 +68,11 @@ public class Simulation {
         double budget = 0;
         int rocketCount = 0;
         for (Rocket rocket : rockets) {
-            /*while (!rocket.land() || !rocket.launch()) {
+            while (!rocket.land() || !rocket.launch()) {
                 rocketCount++;
                 budget += rocket.getCost();
-            }*/
-            while (!rocket.launch()) {
-                rocket.launch();
-                rocketCount++;
             }
-            while (!rocket.land()) {
-                rocket.land();
-                rocketCount++;
-            }
+
             rocketCount++;
             budget += rocket.getCost();
         }
