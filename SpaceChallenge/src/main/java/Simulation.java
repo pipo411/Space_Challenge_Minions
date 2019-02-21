@@ -9,11 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Simulation {
-    private ArrayList<Item> listOfItems;
-
-    public Simulation() {
-        listOfItems = new ArrayList<>();
-    }
+    private ArrayList<Item> listOfItems = new ArrayList<>();
 
     public void loadItems(String path_file) throws Exception {
         String path = String.format("src/main/java/resources/%s", path_file);
@@ -30,17 +26,16 @@ public class Simulation {
     public ArrayList<Rocket> loadU1() {
         ArrayList<Rocket> rocketList = new ArrayList<>();
         U1 rocket = new U1();
-        //Iterate item list
         for (Item item : this.listOfItems) {
             if (!rocket.canCarry(item)) {
                 rocketList.add(rocket);
                 rocket = new U1();
             }
             rocket.carry(item);
-        }
-        //verify if the last rocket was added to rocketList
-        if (!rocketList.contains(rocket)) {
-            rocketList.add(rocket);
+            //verify if the last rocket was added to rocketList
+            if (!rocketList.contains(rocket)) {
+                rocketList.add(rocket);
+            }
         }
         return rocketList;
     }
@@ -55,9 +50,10 @@ public class Simulation {
                 rocket = new U2();
             }
             rocket.carry(item);
-        }
-        if (!rocketList.contains(rocket)) {
-            rocketList.add(rocket);
+            //verify if the last rocket was added to rocketList
+            if (!rocketList.contains(rocket)) {
+                rocketList.add(rocket);
+            }
         }
         return rocketList;
     }

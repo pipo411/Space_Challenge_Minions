@@ -38,4 +38,8 @@ public class Rocket implements SpaceShip {
     public void carry(Item item) {
         this.currentWeight += item.getWeight();
     }
+
+    public int getCurrentWeight() {
+        return currentWeight;
+    }
 }
