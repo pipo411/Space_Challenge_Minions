@@ -3,12 +3,13 @@ package main.java.rocket;
 import main.java.Item;
 import main.java.interfaces.SpaceShip;
 
-public class Rocket implements SpaceShip {
+public abstract class Rocket implements SpaceShip {
     protected int cost;
     protected int weight;
     protected int maxWeight;
     protected int currentWeight;
-    public Rocket (int currentWeight, int cost, int maxWeight, int weight) {
+
+    public Rocket(int currentWeight, int cost, int maxWeight, int weight) {
         this.currentWeight = 0;
         this.cost = cost;
         this.maxWeight = maxWeight;
@@ -20,14 +21,10 @@ public class Rocket implements SpaceShip {
     }
 
     @Override
-    public boolean launch() {
-        return true;
-    }
+    public abstract boolean launch();
 
     @Override
-    public boolean land() {
-        return true;
-    }
+    public abstract boolean land();
 
     @Override
     public boolean canCarry(Item item) {

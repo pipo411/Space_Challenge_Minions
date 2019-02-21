@@ -15,12 +15,12 @@ public class Main {
         Simulation simulation = new Simulation();
         simulation.loadItems("phase-1.txt");
         results = simulation.runSimulation(simulation.loadU1());
-        System.out.println("U1: ");
+        System.out.println(String.format("U1 number of rockets: %d",simulation.loadU1().size()));
         System.out.println(String.format("The simulation has the following results Budget: %s and Rockets: %s", results.get(0), results.get(1)));
         costU1 = (Double) results.get(1);
 
         results = simulation.runSimulation(simulation.loadU2());
-        System.out.println("U2: ");
+        System.out.println(String.format("U2 number of rockets: %d",simulation.loadU2().size()));
         System.out.println(String.format("The simulation has the following results Budget: %s and Rockets: %s", results.get(0), results.get(1)));
         costU2 = (Double) results.get(1);
 
@@ -29,12 +29,12 @@ public class Main {
         Simulation simulation2 = new Simulation();
         simulation2.loadItems("phase-2.txt");
         results = simulation2.runSimulation(simulation.loadU1());
-        System.out.println("U1: ");
+        System.out.println(String.format("U1 number of rockets: %d",simulation.loadU1().size()));
         System.out.println(String.format("The simulation has the following results Budget: %s and Rockets: %s", results.get(0), results.get(1)));
         costU1 += (Double) results.get(1);
 
         results = simulation2.runSimulation(simulation.loadU2());
-        System.out.println("U2: ");
+        System.out.println(String.format("U2 number of rockets: %d",simulation.loadU2().size()));
         System.out.println(String.format("The simulation has the following results Budget: %s and Rockets: %s", results.get(0), results.get(1)));
         costU2 += (Double) results.get(1);
 
