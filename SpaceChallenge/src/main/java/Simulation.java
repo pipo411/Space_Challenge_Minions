@@ -32,6 +32,10 @@ public class Simulation {
                 rocket = new U1();
             }
             rocket.carry(item);
+            //verify if the last rocket was added to rocketList
+            if (!rocketList.contains(rocket)) {
+                rocketList.add(rocket);
+            }
         }
         return rocketList;
     }
@@ -46,6 +50,10 @@ public class Simulation {
                 rocket = new U2();
             }
             rocket.carry(item);
+            //verify if the last rocket was added to rocketList
+            if (!rocketList.contains(rocket)) {
+                rocketList.add(rocket);
+            }
         }
         return rocketList;
     }
